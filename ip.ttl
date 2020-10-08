@@ -1,0 +1,115 @@
+@prefix : <http://purl.org/ip/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix fair: <https://www.go-fair.org/fair-principles/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf:<http://xmlns.com/foaf/0.1/> .
+@base <http://purl.org/ip/> .
+
+<http://purl.org/ip/> rdf:type owl:Ontology ;
+                      dct:title "The Interoperable Principles(ip)"@en;
+                      foaf:homepage  "http://purl.org/ip";
+                      dct:description "The Interoperable Principles for RDF Data (ip) describes their key points"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/terms/description
+dct:description rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/title
+dct:title rdf:type owl:AnnotationProperty .
+
+
+###  http://xmlns.com/foaf/0.1/homepage
+foaf:homepage rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://purl.org/dc/terms/conformsTo
+dct:conformsTo rdf:type owl:ObjectProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://purl.org/ip/commonly-used-vocabulary
+:commonly-used-vocabulary rdf:type owl:Class ;
+                          owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                owl:onProperty dct:conformsTo ;
+                                                owl:someValuesFrom fair:i1-metadata-use-formal-accessible-shared-broadly-applicable-language-knowledge-representation
+                                              ] ;
+                          rdfs:subClassOf :key-point .
+
+
+###  http://purl.org/ip/contextual-knowledge-of-links
+:contextual-knowledge-of-links rdf:type owl:Class ;
+                               owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                     owl:onProperty dct:conformsTo ;
+                                                     owl:someValuesFrom fair:i3-metadata-include-qualified-references-metadata
+                                                   ] ;
+                               rdfs:subClassOf :key-point .
+
+
+###  http://purl.org/ip/controlled-vocabulary
+:controlled-vocabulary rdf:type owl:Class ;
+                       owl:equivalentClass [ rdf:type owl:Restriction ;
+                                             owl:onProperty dct:conformsTo ;
+                                             owl:someValuesFrom fair:i1-metadata-use-formal-accessible-shared-broadly-applicable-language-knowledge-representation
+                                           ] ;
+                       rdfs:subClassOf :key-point .
+
+
+###  http://purl.org/ip/globally-resolvable-vocabulary
+:globally-resolvable-vocabulary rdf:type owl:Class ;
+                                owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                      owl:onProperty dct:conformsTo ;
+                                                      owl:someValuesFrom fair:i2-metadata-use-vocabularies-follow-fair-principles
+                                                    ] ;
+                                rdfs:subClassOf :key-point .
+
+
+###  http://purl.org/ip/good-data-model
+:good-data-model rdf:type owl:Class ;
+                 owl:equivalentClass [ rdf:type owl:Restriction ;
+                                       owl:onProperty dct:conformsTo ;
+                                       owl:someValuesFrom fair:i1-metadata-use-formal-accessible-shared-broadly-applicable-language-knowledge-representation
+                                     ] ;
+                 rdfs:subClassOf :key-point .
+
+
+###  http://purl.org/ip/key-point
+:key-point rdf:type owl:Class .
+
+
+###  http://purl.org/ip/properly-linked
+:properly-linked rdf:type owl:Class ;
+                 owl:equivalentClass [ rdf:type owl:Restriction ;
+                                       owl:onProperty dct:conformsTo ;
+                                       owl:someValuesFrom fair:i3-metadata-include-qualified-references-metadata
+                                     ] ;
+                 rdfs:subClassOf :key-point .
+
+
+###  https://www.go-fair.org/fair-principles/i1-metadata-use-formal-accessible-shared-broadly-applicable-language-knowledge-representation
+fair:i1-metadata-use-formal-accessible-shared-broadly-applicable-language-knowledge-representation rdf:type owl:Class .
+
+
+###  https://www.go-fair.org/fair-principles/i2-metadata-use-vocabularies-follow-fair-principles
+fair:i2-metadata-use-vocabularies-follow-fair-principles rdf:type owl:Class .
+
+
+###  https://www.go-fair.org/fair-principles/i3-metadata-include-qualified-references-metadata
+fair:i3-metadata-include-qualified-references-metadata rdf:type owl:Class .
+
+
+###  Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi
