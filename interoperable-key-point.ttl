@@ -4,63 +4,56 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
 # Ontologies from existing work
-@prefix fair: <https://www.go-fair.org/fair-principles/> . # GO FAIR
+@prefix fair: <https://www.go-fair.org/fair-princikples/> . # GO FAIR
 @prefix ldq: <http://linkeddata3.dia.fi.upm.es/ldq/#> . # Linked Data Quality Ontology
 
 # Newly-defined vocabulary
-@prefix ip: <http://purl.org/ip#> .
+@prefix ikp: <http://purl.org/ist/interoperable-key-point> .
 
 # Define key point
-ip:keyPoint
+ikp:keyPoint
     a rdfs:Class;
     skos:prefLabel "Key Point of Interoperable Principles"@en;
     dct:description "The key points are summarized keywords extracted from the Interoperable principles (i.e., the I out of FAIR principles) according to interpretations from multiple resources: Go FAIR organization and FAIR-related Articles";
     rdfs:comment "There are three artefacts involved in the Interoperable Principles: RDF (data) model, vocabulary, and interlinks. The 'vocabulary' here stands for vocabularies, ontologies, and thesauri. The 'data model' here stands for the graph-based model which define the meaning of data within contexts of its interrelationships with other data.  "@en.
 
 
-ip:good-data-model
-    rdfs:subClassOf ip:keyPoint;
+ikp:good-data-model
+    rdfs:subClassOf ikp:keyPoint;
     dct:conformsTo fair:i1-metadata-use-formal-accessible-shared-broadly-applicable-language-knowledge-representation;
     dct:description "The goodness of a model depends on if it is well-defined to describe and structure (meta)data."@en ;
     ldq:hasAspect ldq:RDFModel ;
-    skos:related ip:controlled-vocabulary, ip:commonly-used-vocabulary, ip:globally-resolvable-vocabulary, ip:properly-linked-data .
+    skos:related ikp:controlled-vocabulary, ikp:commonly-used-vocabulary, ikp:globally-resolvable-vocabulary, ikp:properly-linked-data .
 
 
-ip:controlled-vocabulary
-    rdfs:subClassOf ip:keyPoint;
+ikp:controlled-vocabulary
+    rdfs:subClassOf ikp:keyPoint;
     dct:conformsTo fair:i2-metadata-use-vocabularies-follow-fair-principles;
     dct:description "The controlled vocabulary 1) needs to be versioning with clear documentation which is easily findable and accessible by anyone who uses the dataset, or 2) have acceptable quality of vocabualries in control";
     rdfs:comment "The meaning of 'controlled vocabulary' has been extended by the interpretation 'controlled quality'. "@en ;
     ldq:hasAspect ldq:Vocabulary;
-    skos:related ip:good-data-model .
+    skos:related ikp:good-data-model .
 
 
-ip:commonly-used-vocabulary
-    rdfs:subClassOf ip:keyPoint;
+ikp:commonly-used-vocabulary
+    rdfs:subClassOf ikp:keyPoint;
     dct:conformsTo fair:i2-metadata-use-vocabularies-follow-fair-principles;
     dct:description "Being commonly-used requires that the vocabulary should be 1) known and trusted by domain experts or/and 2) published on a reliable platform."@en ;
     ldq:hasAspect ldq:Vocabulary ;
-    skos:related ip:good-data-model .
+    skos:related ikp:good-data-model .
 
 
-ip:globally-resolvable-vocabulary
-    rdfs:subClassOf ip:keyPoint;
+ikp:globally-resolvable-vocabulary
+    rdfs:subClassOf ikp:keyPoint;
     dct:conformsTo fair:i2-metadata-use-vocabularies-follow-fair-principles;
     dct:description "Being resolvable requires that vocabularies should be available and uses globally unique and persistent identifiers. ";
     ldq:hasAspect ldq:Vocabulary ;
-    skos:related ip:good-data-model .
+    skos:related ikp:good-data-model .
 
 
-ip:properly-linked-data
-    rdfs:subClassOf ip:keyPoint;
+ikp:properly-linked-data
+    rdfs:subClassOf ikp:keyPoint;
     dct:conformsTo fair:i3-metadata-include-qualified-references-metadata;
     dct:description "Properly-linked data requires that 1) data itself can be referred by clearly specifcied relationships, and 2) that different metadata files can be pointing to the same 'target' object. "@en ;
     ldq:hasAspect ldq:Interlinks ;
-    skos:related ip:good-data-model .
-
-
-
-
-
-
-
+    skos:related ikp:good-data-model .
