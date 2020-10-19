@@ -1,0 +1,128 @@
+### Exisiting top-level ontologies
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+### Existing ontologies related to RDF data assessment and FAIR principles
+@prefix dqv: <http://www.w3.org/ns/dqv#> . # Data Quality Vocabulary (DQV)
+@prefix ldqd: <https://www.w3.org/2016/05/ldqd> . # Linked Data Quality Dimension of Zaveri et al. (LDQD)
+@prefix ldq: <http://linkeddata3.dia.fi.upm.es/ldq/#> . # Linked Data Quality Vocabulary (extended version of DQV)
+
+### Newly-defined vocabularies speficif for the research project: "Interoperable Dimension for RDF Data"
+@prefix iqd:<http://purl.org/ist/interoperable-quality-dimensio> .
+@prefix ikp: <http://purl.org/ist/interoperable-key-point> .
+
+
+############################
+### Ontology Information ###
+############################
+
+iqd:
+	a owl:Ontology ;
+    dct:title "Interoperable Quality Dimension (iqm)"@en ;
+    dct:description "The Interoperable Quality Dimension (iqd) vocabulary describes eleven quality dimensions which can affect the interoperability of RDF data"@en ;
+    dct:creator [
+    		foaf:name "Shuxin Zhang";
+    		foaf:mbox <mailto:s.x.zhang@amsterdamumc.nl>
+    	] ;
+    dct:modified "2020-10-05"^^xsd:date ;
+    dct:language "en"^^xsd:language ;
+	foaf:homepage <http://purl.org/ist/interoperable-quality-dimension> .
+
+
+##############################
+### Interoperable Dimension###
+##############################
+
+#1. Semantic Accuracy
+iqd:semanticAccuracy
+    a dqv:Dimension;
+    skos:broadMatch ldqd:semanticAccuracy;
+    skos:prefLabel "Semantic accuracy"@en ;
+	skos:definition "Whether the data model 1)is able to capture sufficient information, or 2)represent the real object by correct labelling." @en ;
+    skos:mappingRelation ikp:good-data-model, ikp:properly-linked-data .
+
+
+#2. Consistency
+iqd:consistency
+    a dqv:Dimension;
+    skos:broadMatch ldqd:consistency;
+    skos:prefLabel "Consistency"@en ;
+	skos:definition "The axioms that describe a digital object should be free of contradictions" @en ;
+    skos:mappingRelation ikp:good-data-model, ikp:controlled-vocabulary .
+
+#3. Availability
+iqd:availability
+    a dqv:Dimension;
+    skos:broadMatch ldqd:availability;
+    skos:prefLabel "Availability"@en ;
+	skos:definition "The extent to which vocabularies or data(or some portion of it) is present, obtainable and ready for use." @en ;
+    skos:mappingRelation ikp:globally-resolvable-vocabulary, ikp:properly-linked-data .
+
+#4.Interlinking
+iqd:interlinking
+    a dqv:Dimension;
+    skos:broadMatch ldqd:interlinking;
+    skos:prefLabel "Interlinking"@en ;
+	skos:definition "The degree to which entities that represent the same concept are linked to each other, be it within or between two or more data sources."@en;
+    skos:mappingRelation ikp:properly-linked-data .
+
+#5.Understandability
+iqd:understandability
+    a dqv:Dimension;
+    skos:broadMatch ldqd:understandability;
+    skos:prefLabel "Understandability"@en ;
+	skos:definition "The ease with which data model or data can be comprehended without ambiguity and be used by a human information consumer."@en ;
+    skos:mappingRelation ikp:good-data-model, ikp:properly-linked-data .
+
+#6.Relevancy
+iqd:relevancy
+    a dqv:Dimension;
+    skos:broadMatch ldqd:relevancy;
+    skos:prefLabel "Relevancy"@en ;
+	skos:definition "The provision of information which is in accordance with the task at hand and important to the users."@en ;
+    skos:mappingRelation ikp:properly-linked-data .
+
+#7.Versatility
+iqd:versatility
+    a dqv:Dimension;
+    skos:broadMatch ldqd:versatility;
+    skos:prefLabel "Versatility"@en ;
+	skos:definition "The availability of the data in different representations or in different access approaches"@en ;
+    skos:mappingRelation ikp:properly-linked-data .
+
+#8.Conciseness
+iqd:conciseness
+    a dqv:Dimension;
+    skos:broadMatch ldqd:conciseness;
+    skos:prefLabel "Conciseness"@en ;
+	skos:definition "Conciseness refers to 1) the minimization of redundancy of entities at the data model and the data level, or 2)the compact and well-formated representation of data"@en ;
+    skos:mappingRelation ikp:good-data-model, ikp:properly-linked-data .
+
+#9.Interpretability
+iqd:interpretability
+    a dqv:Dimension;
+    skos:broadMatch ldqd:interpretability;
+    skos:prefLabel "Interpretability"@en ;
+	skos:definition "Whether information is represented using an appropriate notation and whether the machine is able to process the data. "@en ;
+    skos:mappingRelation ikp:good-data-model .
+
+#10.Representational-consistency
+iqd:representationalConsistency
+    a dqv:Dimension;
+    skos:broadMatch ldqd:interoperability;
+    skos:prefLabel "Representational Consistency"@en ;
+	skos:definition "The extent to which information is represented in the same format."@en ;
+    skos:mappingRelation ikp:good-data-model .
+
+#11.Trustworthiness
+iqd:trustworthiness
+    a dqv:Dimension;
+    skos:broadMatch ldqd:trustworthiness;
+    skos:prefLabel "Trustworthiness"@en ;
+	skos:definition "The degree to which the information is accepted to be correct, true, real and credible."@en ;
+    skos:mappingRelation ikp:commonly-used-vocabulary, ikp:properly-linked-data .

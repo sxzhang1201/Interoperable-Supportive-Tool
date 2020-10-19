@@ -2,6 +2,9 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dct: <http://purl.org/dc/terms/>.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
 
 # Ontologies from existing work
 @prefix fair: <https://www.go-fair.org/fair-princikples/> . # GO FAIR
@@ -10,7 +13,27 @@
 # Newly-defined vocabulary
 @prefix ikp: <http://purl.org/ist/interoperable-key-point> .
 
-# Define key point
+############################
+### Ontology Information ###
+############################
+
+ikp:
+	a owl:Ontology ;
+    dct:title "Interoperable Key Point (ikp)"@en ;
+    dct:description "The Interoperable Key Point (ikp) describes five key points which summarize the Interoperable Principles out of FAIR Principles. "@en ;
+    dct:creator [
+    		foaf:name "Shuxin Zhang";
+    		foaf:mbox <mailto:s.x.zhang@amsterdamumc.nl>
+    	] ;
+    dct:modified "2020-10-05"^^xsd:date ;
+    dct:language "en"^^xsd:language ;
+	foaf:homepage <http://purl.org/ist/interoperable-key-point> .
+
+
+###############################
+### Interoperable Key Point ###
+###############################
+
 ikp:keyPoint
     a rdfs:Class;
     skos:prefLabel "Key Point of Interoperable Principles"@en;
