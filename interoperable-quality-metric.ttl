@@ -1,0 +1,295 @@
+### Exisiting top-level ontologies
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix prof: <http://www.w3.org/ns/dx/prof/> .
+
+### Existing ontologies related to RDF data assessment and FAIR principles
+@prefix dqv: <http://www.w3.org/ns/dqv#> .  # Data Quality Vocabulary
+@prefix ldqd: <https://www.w3.org/2016/05/ldqd> .   # Linked Data Quality Dimension
+@prefix ldq: <http://linkeddata3.dia.fi.upm.es/ldq/#> . # Linked Data Quality Ontology
+@prefix dqm: <http://purl.org/eis/vocab/dqm#> . # Data Quality Metric
+
+### Newly-defined vocabularies speficif for the research project: "Interoperable Dimension for RDF Data"
+@prefix iqm:<http://purl.org/ist/interoperable-quality-metric#> .
+@prefix iqd:<http://purl.org/ist/interoperable-quality-dimension#> .
+@prefix ifc:<http://purl.org/iqd-fc/> .
+
+############################
+### Ontology Information ###
+############################
+
+iqm:
+	a owl:Ontology ;
+    dct:title "Interoperable Quality Metrics (iqm)"@en ;
+    dct:description "The Interoperable Quality Metrics (iqm) vocabulary describes a set of metrics for measuring interoperable dimensions. "@en ;
+    dct:creator [
+    		foaf:name "Shuxin Zhang";
+    		foaf:mbox <mailto:s.x.zhang@amsterdamumc.nl>
+    	] ;
+    dct:modified "2020-10-05"^^xsd:date ;
+    dct:language "en"^^xsd:language ;
+	foaf:homepage <http://purl.org/ist/interoperable-quality-metric> .
+
+
+#######################
+### Define Classes  ###
+#######################
+
+iqm:objectiveMetric
+	rdfs:subClass dqv:Metric;
+    skos:prefLabel "Objective Metric";
+	skos:definition "The metrics refer to measures which cannot be affected by subjective factors, and have potential to be automated by machines. " .
+
+
+iqm:subjectiveMetric
+	rdfs:subClass dqv:Metric;
+    skos:prefLabel "Subjective Metric";
+	skos:definition "The metrics refer to measures which can be affected by subjective factors, for example, personal experience.  ".
+
+
+##############################
+### Interoperable Metrtics ###
+##############################
+
+#1. Consistency Metrics
+iqm:MisplacedClassesOrPropertiesMetric
+    rdfs:subClass iqm:objectiveMetric;
+    dqv:inDimension iqd:consistency;
+    skos:closeMatch dqm:MisplacedClassesOrPropertiesMetric;
+    ldq:hasAspect ldq:RDFModel;
+    ldq:hasGranularity ldq:Triple;
+    prof:hasArtifact ifc:MisplacedClasses, ifc:MisplacedProperties;
+    skos:prefLabel "Misplaced classes or properties metric"@en ;
+	skos:definition "Detect resources that are - defined as a property but appear on subject or object positions in other triples (except cases like ex:prop rdf:type rdf:Property, ex:prop rds:subPropetyOf) or defined as a class but  appear on predicate position in other triples. "@en .
+
+
+iqm:MisusedOwlDatatypeOrObjectPropertiesMetric
+    rdfs:subClass iqm:objectiveMetric;
+    dqv:inDimension iqd:consistency;
+    skos:closeMatch dqm:MisusedOwlDatatypeOrObjectPropertiesMetric;
+    ldq:hasAspect ldq:RDFModel;
+    ldq:hasGranularity ldq:Triple;
+    prof:hasArtifact ifc:MisusedDatatypeProperties, ifc:MisusedObjectProperties;
+    skos:prefLabel "Misused Owl datatype or object properties metric"@en ;
+	skos:definition "Detect properties that are defined as a owl:datatypeProperty but is used as objectProperty and properties defined as a owl:object property and used as datatype property." @en .
+
+iqm:EntitiesAsMembersOfDisjointClassesMetric
+    rdfs:subClass iqm:objectiveMetric;
+    dqv:inDimension iqd:consistency;
+    skos:closeMatch dqm:EntitiesAsMembersOfDisjointClassesMetric;
+    ldq:hasAspect ldq:DomainData;
+    ldq:hasGranularity ldq:Graph;
+    prof:hasArtifact ifc:InstanceofDisjointClasses;
+    skos:prefLabel "Entities as members of disjoint classes metric"@en ;
+	skos:definition "Detect entities described as members of disjoint classes."@en .
+
+iqm:OntologyHijackingMetric
+    rdfs:subClass iqm:objectiveMetric;
+    dqv:inDimension iqd:consistency;
+    skos:closeMatch dqm:OntologyHijackingMetric;
+    ldq:hasAspect ldq:Vocabulary;
+    ldq:hasGranularity ldq:IRI;
+    prof:hasArtifact ifc:RedefinedTerms;
+    skos:prefLabel "Ontology hijacking metric"@en ;
+	skos:definition "Detects the redefinition by third parties of external classes/properties such that reasoning over data using those external terms is affected."@en .
+
+iqm:InvalidUseOfUndefinedClassesOrPropertiesMetric
+    rdfs:subClass iqm:objectiveMetric;
+    dqv:inDimension iqd:consistency;
+    ldq:hasAspect ldq:RDFModel;
+    ldq:hasGranularity ldq:IRI;
+    prof:hasArtifact ifc:InvalidUseOfUndefinedClasses, ifc:InvalidUseOfUndefinedProperties;
+    skos:prefLabel "Invalid use of undefined classes or properties metric"@en ;
+	skos:definition "Detect classes or properties that have no definitions."@en .
+
+iqm:InvalidUseOfDeprecatedClassesOrPropertiesMetric
+    rdfs:subClass iqm:objectiveMetric;
+    dqv:inDimension iqd:consistency;
+    ldq:hasAspect ldq:RDFModel;
+    ldq:hasGranularity ldq:IRI;
+    prof:hasArtifact ifc:InvalidUseOfDeprecatedClasses, ifc:InvalidUseOfDeprecatedProperties;
+    skos:prefLabel "Invalid use of deprecated classes or properties metric"@en ;
+	skos:definition "Detect deprecated classes or properties."@en .
+
+iqm:malformedLiteralsMetric
+    rdfs:subClass iqm:objectiveMetric;
+    dqv:inDimension iqd:consistency;
+    ldq:hasAspect ldq:DomainData;
+    ldq:hasGranularity ldq:Triple;
+    prof:hasArtifact ifc:mailformedLiterals;
+    skos:prefLabel "Mailformed literals metric"@en ;
+	skos:definition "Detect literals which do not comply with its specified datatype."@en .
+
+#2. Semantic Accuracy Metrics
+iqm:InaccurateAnnotationMetric
+    rdfs:subClass iqm:subjectiveMetric;
+    dqv:inDimension iqd:semanticAccuracy;
+    ldq:hasAspect ldq:Metadata;
+    ldq:hasGranularity ldq:Graph;
+    prof:hasArtifact ifc:InaccurateAnnotationValues;
+    skos:prefLabel "Inaccurate annotation and labelling metric"@en ;
+	skos:definition "Find inaccurate annotations which fail to clarify facts. "@en .
+    # 为什么会有classification?
+
+iqm:InsufficientCapturedInformationMetric
+    rdfs:subClass iqm:subjectiveMetric;
+    dqv:inDimension iqd:semanticAccuracy;
+    ldq:hasAspect ldq:RDFModel;
+    ldq:hasGranularity ldq:Graph;
+    prof:hasArtifact ifc:InsufficientCapturedInformation;
+    skos:prefLabel "Insufficient information capture metric"@en ;
+	skos:definition "Determine if a data model captures adequate elements for a given task. "@en .
+
+#3. Conciseness
+iqm:RedundantAttributesMetric
+    rdfs:subClass iqm:subjectiveMetric;
+    dqv:inDimension iqd:conciseness;
+    ldq:hasAspect ldq:RDFModel;
+    ldq:hasGranularity ldq:Graph;
+    prof:hasArtifact ifc:RedundantAtrributes;
+    skos:prefLabel "Redundant attribute metric"@en ;
+	skos:definition "Detect syntactically or semantically redudant attributes in a data model. "@en .
+
+iqm:RedundantObjectsMetric
+    rdfs:subClass iqm:objectiveMetric;  # should be objective or subjective?
+    dqv:inDimension iqd:conciseness;
+    ldq:hasAspect ldq:DomainData;
+    ldq:hasGranularity ldq:Dataset;
+    prof:hasArtifact ifc:RedundantObjects;
+    skos:prefLabel "Redundant object metric"@en ;
+	skos:definition "Detect redundant objects in a given dataset. "@en .
+
+#4. Understandability
+iqm:LackOfHumanReadableLabellingMetric
+    rdfs:subClass iqm:objectiveMetric;  # should be objective or subjective?
+    dqv:inDimension iqd:understandability; # Also relate to I3.
+    ldq:hasAspect ldq:RDFModel;
+    ldq:hasGranularity ldq:Graph;
+    prof:hasArtifact ifc:LackLabellingForClasses, ifc:LackLabellingForModel, ifc:LackLabellingForProperties;
+    skos:prefLabel "Human-readable labelling metric"@en ;
+	skos:definition "Detect the use of rdfs:comment or rdfs:label for each entity and relationship in a data model or for the data model itself."@en .
+
+iqm:VocabularyUsageIndicationMetric
+    rdfs:subClass iqm:objectiveMetric;  # should be objective or subjective?
+    dqv:inDimension iqd:understandability; # Also relate to I3.
+    skos:closeMatch dqm:VocabularyUsageIndication;
+    ldq:hasAspect ldq:Vocabulary;
+    ldq:hasGranularity ldq:Dataset;
+    prof:hasArtifact ifc:NoIndicationOfVocabulary;
+    skos:prefLabel "Vocabulary Usage Indication metric"@en ;
+	skos:definition "Check if a list of vocabularies used in the dataset is provided. " .
+
+#5. Availability
+iqm:RDFAvailabilityMetric
+    rdfs:subClass iqm:objectiveMetric;
+    dqv:inDimension iqd:availability;
+    skos:closeMatch dqm:RDFAvailabilityMetric;
+    ldq:hasAspect ldq:DomainData;
+    ldq:hasGranularity ldq:Dataset;
+    prof:hasArtifact ifc:NoRDFAvailable;
+    skos:prefLabel "Availability of RDF data metric"@en ;
+	skos:definition "Check if an RDF data is available. " .
+
+#6. Interlinking
+iqm:BackLinksAndForwardLinksMetric
+    rdfs:subClass iqm:objectiveMetric;
+    dqv:inDimension iqd:interlinking;
+    skos:closeMatch dqm:InterlinkDetectionMetric, dqm:LinksToExternalDataProvidersMetric;
+    ldq:hasAspect ldq:Interlinks;
+    ldq:hasGranularity ldq:Dataset;
+    prof:hasArtifact ifc:NoRDFAvailable;
+    skos:prefLabel "Interlink data detection metric"@en ;
+	skos:definition "Detect the existing of RDF data that represents the same real-world object. " .
+
+iqm:SameAsDataMetric
+    rdfs:subClass iqm:objectiveMetric;
+    dqv:inDimension iqd:interlinking;
+    ldq:hasAspect ldq:Interlinks;
+    ldq:hasGranularity ldq:Dataset;
+    prof:hasArtifact ifc:NoSameAsData;
+    skos:prefLabel "SameAs data metric"@en ;
+	skos:definition "Detect the existing of owl:SameAs triple which represents interlinked data. " .
+
+#7. Relevancy
+iqm:RelevancyOfAnnotations
+    rdfs:subClass iqm:subjectiveMetric;
+    dqv:inDimension iqd:relevancy;
+    ldq:hasAspect ldq:Metadata;
+    ldq:hasGranularity ldq:Graph;
+    prof:hasArtifact ifc:IrrelevantAnnotationForProperties, ifc:IrrelevantAnnotationForModel;
+    skos:prefLabel "Relevancy of annotations metric"@en ;
+	skos:definition "Determine if annotations are relevant to the task regarding target entities or RDF model. " .
+
+#8. Versatility
+iqm:DifferentSerialisationsMetric
+    rdfs:subClass iqm:objectiveMetric;
+    dqv:inDimension iqd:versatility;
+    skos:closeMatch dqm:DifferentSerialisationsMetric;
+    ldq:hasAspect ldq:Serialization;
+    ldq:hasGranularity ldq:Dataset;
+    prof:hasArtifact ifc:NoAlternativeSerializationFormat;
+    skos:prefLabel "Different serialization format metric"@en ;
+	skos:definition "Detects if a dataset has more than one serialisation format. " .
+
+iqm:AlternativeAccessMethodMetric
+    rdfs:subClass iqm:objectiveMetric;
+    dqv:inDimension iqd:versatility;
+    ldq:hasAspect ldq:DomainData;
+    ldq:hasGranularity ldq:Dataset;
+    prof:hasArtifact ifc:NoAlternativeAccessMethod;
+    skos:prefLabel "Alternative access metric"@en ;
+	skos:definition "Detects if a dataset can be accessed by a different method. " .
+
+#9. Interpretability
+iqm:NoBlankNodeMetric
+    rdfs:subClass iqm:objectiveMetric;
+    dqv:inDimension iqd:interpretability;
+    skos:closeMatch dqm:NoBlankNodeMetric;
+    ldq:hasAspect ldq:RDFModel;
+    ldq:hasGranularity ldq:Graph;
+    prof:hasArtifact ifc:NoBlankNodeForMissingValues;
+    skos:prefLabel "No blank node metric"@en ;
+	skos:definition "Detect if there is any blank node. " .
+
+iqm:AmbiguousAnnotationMetric
+    rdfs:subClass iqm:subjectiveMetric;
+    dqv:inDimension iqd:interpretability;
+    ldq:hasAspect ldq:MetaData;
+    ldq:hasGranularity ldq:Graph;
+    prof:hasArtifact ifc:AmbiguousAnnotation;
+    skos:prefLabel "Ambiguous annotation metric"@en ;
+	skos:definition "Determine if an annotation is clarified. " .
+
+#10. Representational-consistency
+iqm:ReuseExistingTerms
+    rdfs:subClass iqm:objectiveMetric;
+    dqv:inDimension iqd:representationalConsistency;
+    ldq:hasAspect ldq:Vocaubulary;
+    ldq:hasGranularity ldq:Graph;
+    prof:hasArtifact ifc:NotUseExistingTerms;
+    skos:prefLabel "Reuse of existing terms metric"@en ;
+	skos:definition "Detect the use of existing terms. " .
+
+#11. Trustworthiness
+iqm:AvailabilityOfTrustInformation
+    rdfs:subClass iqm:objectiveMetric;
+    dqv:inDimension iqd:trustworthiness;
+    ldq:hasAspect ldq:Metadata;
+    ldq:hasGranularity ldq:Graph;
+    prof:hasArtifact ifc:NoTrustInformation;
+    skos:prefLabel "Availability of trust information metric"@en ;
+	skos:definition "Detect if trust-related information is provided. "@en .
+
+iqm:InterpretationOfTrustInformation
+    rdfs:subClass iqm:subjectiveMetric;
+    dqv:inDimension iqd:trustworthiness;
+    ldq:hasAspect ldq:Metadata;
+    ldq:hasGranularity ldq:Graph;
+    prof:hasArtifact ifc:NoInterpretationOfTrustInformation;
+    skos:prefLabel "Interpretation of trust information metric"@en ;
+	skos:definition "Determine if the trust information provide sufficient input for decisions. "@en .

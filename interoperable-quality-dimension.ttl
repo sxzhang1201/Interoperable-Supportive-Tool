@@ -13,7 +13,7 @@
 @prefix ldq: <http://linkeddata3.dia.fi.upm.es/ldq/#> . # Linked Data Quality Vocabulary (extended version of DQV)
 
 ### Newly-defined vocabularies speficif for the research project: "Interoperable Dimension for RDF Data"
-@prefix iqd:<http://purl.org/ist/interoperable-quality-dimensio> .
+@prefix iqd:<http://purl.org/ist/interoperable-quality-dimension> .
 @prefix ikp: <http://purl.org/ist/interoperable-key-point> .
 
 
@@ -68,8 +68,9 @@ iqd:interlinking
     a dqv:Dimension;
     skos:broadMatch ldqd:interlinking;
     skos:prefLabel "Interlinking"@en ;
-	skos:definition "The degree to which entities that represent the same concept are linked to each other, be it within or between two or more data sources."@en;
-    skos:mappingRelation ikp:properly-linked-data .
+	skos:definition "The degree to which instances that represent the same real-world object are linked to each other, be it within or between two or more data sources."@en;
+    skos:mappingRelation ikp:properly-linked-data ;
+    skos:related iqd:conciseness .
 
 #5.Understandability
 iqd:understandability
@@ -77,14 +78,15 @@ iqd:understandability
     skos:broadMatch ldqd:understandability;
     skos:prefLabel "Understandability"@en ;
 	skos:definition "The ease with which data model or data can be comprehended without ambiguity and be used by a human information consumer."@en ;
-    skos:mappingRelation ikp:good-data-model, ikp:properly-linked-data .
+    skos:mappingRelation ikp:good-data-model, ikp:properly-linked-data ;
+    skos:related iqd:interpretability .
 
 #6.Relevancy
 iqd:relevancy
     a dqv:Dimension;
     skos:broadMatch ldqd:relevancy;
     skos:prefLabel "Relevancy"@en ;
-	skos:definition "The provision of information which is in accordance with the task at hand and important to the users."@en ;
+	skos:definition "The provision of information which is in accordance with the task at hand. "@en ;
     skos:mappingRelation ikp:properly-linked-data .
 
 #7.Versatility
@@ -93,7 +95,8 @@ iqd:versatility
     skos:broadMatch ldqd:versatility;
     skos:prefLabel "Versatility"@en ;
 	skos:definition "The availability of the data in different representations or in different access approaches"@en ;
-    skos:mappingRelation ikp:properly-linked-data .
+    skos:mappingRelation ikp:properly-linked-data ;
+    skos:related iqd:availability .
 
 #8.Conciseness
 iqd:conciseness
