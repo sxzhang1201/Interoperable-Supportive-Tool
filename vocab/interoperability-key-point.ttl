@@ -11,7 +11,7 @@
 @prefix ldq: <http://linkeddata3.dia.fi.upm.es/ldq/#> . # Linked Data Quality Ontology
 
 # Newly-defined vocabulary
-@prefix ikp: <http://purl.org/ist/interoperable-key-point> .
+@prefix ikp: <http://purl.org/ist/interoperability-key-point#> .
 
 ############################
 ### Ontology Information ###
@@ -20,14 +20,14 @@
 ikp:
 	a owl:Ontology ;
     dct:title "Interoperable Key Point (ikp)"@en ;
-    dct:description "The Interoperable Key Point (ikp) describes five key points which summarize the Interoperable Principles out of FAIR Principles. "@en ;
+    dct:description "The Interoperable Key Point (ikp) describes five key points which summarize the Interoperability Principles out of FAIR Principles. "@en ;
     dct:creator [
     		foaf:name "Shuxin Zhang";
     		foaf:mbox <mailto:s.x.zhang@amsterdamumc.nl>
     	] ;
     dct:modified "2020-10-05"^^xsd:date ;
     dct:language "en"^^xsd:language ;
-	foaf:homepage <http://purl.org/ist/interoperable-key-point> .
+	foaf:homepage <http://purl.org/ist/interoperability-key-point> .
 
 
 ###############################

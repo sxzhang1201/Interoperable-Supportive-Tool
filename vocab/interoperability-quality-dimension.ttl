@@ -13,8 +13,8 @@
 @prefix ldq: <http://linkeddata3.dia.fi.upm.es/ldq/#> . # Linked Data Quality Vocabulary (extended version of DQV)
 
 ### Newly-defined vocabularies speficif for the research project: "Interoperable Dimension for RDF Data"
-@prefix iqd:<http://purl.org/ist/interoperable-quality-dimension> .
-@prefix ikp: <http://purl.org/ist/interoperable-key-point> .
+@prefix iqd:<http://purl.org/ist/interoperability-quality-dimension#> .
+@prefix ikp: <http://purl.org/ist/interoperability-key-point#> .
 
 
 ############################
@@ -31,7 +31,7 @@ iqd:
     	] ;
     dct:modified "2020-10-05"^^xsd:date ;
     dct:language "en"^^xsd:language ;
-	foaf:homepage <http://purl.org/ist/interoperable-quality-dimension> .
+	foaf:homepage <http://purl.org/ist/interoperability-quality-dimension> .
 
 
 ##############################
