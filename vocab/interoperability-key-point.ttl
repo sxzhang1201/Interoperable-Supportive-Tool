@@ -7,11 +7,11 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/>.
 
 # Ontologies from existing work
-@prefix fair: <https://www.go-fair.org/fair-princikples/> . # GO FAIR
-@prefix ldq: <http://linkeddata3.dia.fi.upm.es/ldq/#> . # Linked Data Quality Ontology
+@prefix fair: <https://www.go-fair.org/fair-principles/> . # GO FAIR
+@prefix ldq: <http://linkeddata3.dia.fi.upm.es/ldq#> . # Linked Data Quality Ontology
 
 # Newly-defined vocabulary
-@prefix ikp: <http://purl.org/ist/interoperability-key-point#> .
+@prefix ikp: <http://purl.org/ikp#> .
 
 ############################
 ### Ontology Information ###

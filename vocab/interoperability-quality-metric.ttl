@@ -9,13 +9,13 @@
 
 ### Existing ontologies related to RDF data assessment and FAIR principles
 @prefix dqv: <http://www.w3.org/ns/dqv#> .  # Data Quality Vocabulary
-@prefix ldqd: <https://www.w3.org/2016/05/ldqd> .   # Linked Data Quality Dimension
-@prefix ldq: <http://linkeddata3.dia.fi.upm.es/ldq/#> . # Linked Data Quality Ontology
+@prefix ldqd: <https://www.w3.org/2016/05/ldqd#> .   # Linked Data Quality Dimension
+@prefix ldq: <http://linkeddata3.dia.fi.upm.es/ldq#> . # Linked Data Quality Ontology
 @prefix dqm: <http://purl.org/eis/vocab/dqm#> . # Data Quality Metric
 
 ### Newly-defined vocabularies speficif for the research project: "Interoperable Dimension for RDF Data"
-@prefix iqm:<http://purl.org/ist/interoperability-quality-metric#> .
-@prefix iqd:<http://purl.org/ist/interoperability-quality-dimension#> .
+@prefix iqm:<http://purl.org/iqm#> .
+@prefix iqd:<http://purl.org/iqd#> .
 
 ############################
 ### Ontology Information ###
