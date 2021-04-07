@@ -44,7 +44,8 @@ iqd:semanticAccuracy
     skos:broadMatch ldqd:semanticAccuracy;
     skos:prefLabel "Semantic accuracy"@en ;
 	skos:definition "Whether the data model 1)is able to capture sufficient information, or 2)represent the real object by correct labelling." @en ;
-    skos:mappingRelation ikp:good-data-model, ikp:properly-linked-data .
+    skos:relatedMatch ikp:good-data-model, ikp:properly-linked-data ;
+    skos:related iqd:trustworthiness, iqd:consistency, iqd:interlinking .
 
 
 #2. Consistency
@@ -53,7 +54,7 @@ iqd:consistency
     skos:broadMatch ldqd:consistency;
     skos:prefLabel "Consistency"@en ;
 	skos:definition "The axioms that describe a digital object should be free of contradictions" @en ;
-    skos:mappingRelation ikp:good-data-model, ikp:controlled-vocabulary .
+    skos:relatedMatch ikp:good-data-model, ikp:controlled-vocabulary .
 
 #3. Availability
 iqd:availability
@@ -61,7 +62,8 @@ iqd:availability
     skos:broadMatch ldqd:availability;
     skos:prefLabel "Availability"@en ;
 	skos:definition "The extent to which vocabularies or data(or some portion of it) is present, obtainable and ready for use." @en ;
-    skos:mappingRelation ikp:globally-resolvable-vocabulary, ikp:properly-linked-data .
+    skos:relatedMatch ikp:globally-resolvable-vocabulary, ikp:properly-linked-data ;
+    skos:related iqd:interlinking .
 
 #4.Interlinking
 iqd:interlinking
@@ -69,7 +71,7 @@ iqd:interlinking
     skos:broadMatch ldqd:interlinking;
     skos:prefLabel "Interlinking"@en ;
 	skos:definition "The degree to which instances that represent the same real-world object are linked to each other, be it within or between two or more data sources."@en;
-    skos:mappingRelation ikp:properly-linked-data ;
+    skos:relatedMatch ikp:properly-linked-data ;
     skos:related iqd:conciseness .
 
 #5.Understandability
@@ -78,7 +80,7 @@ iqd:understandability
     skos:broadMatch ldqd:understandability;
     skos:prefLabel "Understandability"@en ;
 	skos:definition "The ease with which data model or data can be comprehended without ambiguity and be used by a human information consumer."@en ;
-    skos:mappingRelation ikp:good-data-model, ikp:properly-linked-data ;
+    skos:relatedMatch ikp:good-data-model, ikp:properly-linked-data ;
     skos:related iqd:interpretability .
 
 #6.Relevancy
@@ -87,7 +89,7 @@ iqd:relevancy
     skos:broadMatch ldqd:relevancy;
     skos:prefLabel "Relevancy"@en ;
 	skos:definition "The provision of information which is in accordance with the task at hand. "@en ;
-    skos:mappingRelation ikp:properly-linked-data .
+    skos:relatedMatch ikp:properly-linked-data .
 
 #7.Versatility
 iqd:versatility
@@ -95,7 +97,7 @@ iqd:versatility
     skos:broadMatch ldqd:versatility;
     skos:prefLabel "Versatility"@en ;
 	skos:definition "The availability of the data in different representations or in different access approaches"@en ;
-    skos:mappingRelation ikp:properly-linked-data ;
+    skos:relatedMatch ikp:properly-linked-data ;
     skos:related iqd:availability .
 
 #8.Conciseness
@@ -104,7 +106,8 @@ iqd:conciseness
     skos:broadMatch ldqd:conciseness;
     skos:prefLabel "Conciseness"@en ;
 	skos:definition "Conciseness refers to 1) the minimization of redundancy of entities at the data model and the data level, or 2)the compact and well-formated representation of data"@en ;
-    skos:mappingRelation ikp:good-data-model, ikp:properly-linked-data .
+    skos:relatedMatch ikp:good-data-model, ikp:properly-linked-data ;
+    skos:related iqd:consistency .
 
 #9.Interpretability
 iqd:interpretability
@@ -112,7 +115,7 @@ iqd:interpretability
     skos:broadMatch ldqd:interpretability;
     skos:prefLabel "Interpretability"@en ;
 	skos:definition "Whether information is represented using an appropriate notation and whether the machine is able to process the data. "@en ;
-    skos:mappingRelation ikp:good-data-model .
+    skos:relatedMatch ikp:good-data-model .
 
 #10.Representational-consistency
 iqd:representationalConsistency
@@ -120,7 +123,7 @@ iqd:representationalConsistency
     skos:broadMatch ldqd:interoperability;
     skos:prefLabel "Representational Consistency"@en ;
 	skos:definition "The extent to which information is represented in the same format."@en ;
-    skos:mappingRelation ikp:good-data-model .
+    skos:relatedMatch ikp:good-data-model .
 
 #11.Trustworthiness
 iqd:trustworthiness
@@ -128,4 +131,4 @@ iqd:trustworthiness
     skos:broadMatch ldqd:trustworthiness;
     skos:prefLabel "Trustworthiness"@en ;
 	skos:definition "The degree to which the information is accepted to be correct, true, real and credible."@en ;
-    skos:mappingRelation ikp:commonly-used-vocabulary, ikp:properly-linked-data .
+    skos:relatedMatch ikp:commonly-used-vocabulary, ikp:properly-linked-data .

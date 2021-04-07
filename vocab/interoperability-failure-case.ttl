@@ -1,0 +1,286 @@
+### Exisiting top-level ontologies
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix prof: <http://www.w3.org/ns/dx/prof/> .
+
+
+### Existing ontologies related to RDF data assessment and FAIR principles
+@prefix dqv: <http://www.w3.org/ns/dqv#> .
+@prefix ldqd: <https://www.w3.org/2016/05/ldqd> .
+@prefix ldq: <http://linkeddata3.dia.fi.upm.es/ldq/#> .
+@prefix daq: <http://purl.org/eis/vocab/daq#> .
+@prefix dqm: <http://purl.org/eis/vocab/dqm#> .
+@prefix dqm-prob: <http://www.diachron-fp7.eu/dqm-prob#> .
+
+
+### Newly-defined vocabularies speficif for the research project: "Interoperable Dimension for RDF Data"
+
+@prefix ikp: <http://purl.org/ikp#> .
+@prefix iqm:<http://purl.org/iqm#> .
+@prefix iqd:<http://purl.org/iqd#> .
+@prefix ifc:<http://purl.org/ifc#> .
+
+
+
+############################
+### Ontology Information ###
+############################
+
+ifc:
+	a owl:Ontology ;
+    dct:title "Interoperable Failure Case (ifc)"@en ;
+    dct:description "Interoperable Failure Case (ifc) vocabulary collects a list of failure cases which describe the interoperable quality metrics"@en ;
+    dct:creator [
+    		foaf:name "Shuxin Zhang";
+    		foaf:mbox <mailto:s.x.zhang@amsterdamumc.nl>
+    	] ;
+    dct:modified "2020-10-05"^^xsd:date ;
+    dct:language "en"^^xsd:language ;
+	foaf:homepage <http://purl.org/ist/interoperability-failure-case> .
+
+
+##################################
+### Interoperable Failure Cases###
+##################################
+
+ifc:failureCase
+    a rdfs:Class;
+    rdfs:prefLabel "Failure Case"@en;
+    dct:description "Failure cases are use cases in which an RDF dataset fails to have the characteristics required for a certain interoperability dimension. ";
+    rdfs:comment "Failure cases are sourced from either existing problem lists or expert experience. "@en.
+
+
+# 1. Consistency Failure Cases
+dqm-prob:MisplacedClass
+    a ifc:failureCase;
+    rdfs:label "Misplaced Class";
+    rdfs:comment "The referred resource used a defined class instead of a property in the predicate's position." ;
+    dct:keyword "These are misplaced classes that should be used as the object of an rdf:type triple.  "@en ;
+    prof:isProfileOf dqm:MisplacedClassesOrPropertiesMetric .
+
+
+dqm-prob:MisplacedProperty
+    a ifc:failureCase;
+    rdfs:label "Misplaced Property";
+	rdfs:comment "The referred resource, used a defined property instead of a class, in an rdf:type statement object's position." ;
+    dct:keyword "These are misplaced properties that should be used as the predicate of a triple. "@en ;
+    prof:isProfileOf dqm:MisplacedClassesOrPropertiesMetric .
+
+
+dqm-prob:MisusedDatatypeProperty
+    a ifc:failureCase;
+	rdfs:label "Misused Datatype Property" ;
+	rdfs:comment "The referred resource used a datatype property instead of an Object Property." ;
+    dct:keyword "These properties of the owl:dataTypeProperty type are not correctly used. "@en ;
+    prof:isProfileOf dqm:MisusedOwlDatatypeOrObjectPropertiesMetric .
+
+
+dqm-prob:MisusedObjectProperty
+    a ifc:failureCase;
+    rdfs:label "Misused ObjectProperty" ;
+	rdfs:comment "The referred resource used an object property instead of a datatype property." ;
+    dct:keyword "These properties of the owl:objectProperty type are not correctly used. "@en ;
+    prof:isProfileOf dqm:MisusedOwlDatatypeOrObjectPropertiesMetric .
+
+dqm-prob:MultiTypedResourceWithDisjointedClasses
+    a ifc:failureCase;
+    rdfs:label "Disjoined Classes Typing";
+	rdfs:comment "The referred resource is multi-typed with disjoined classes." ;
+    dct:keyword "These classes are not disjoint with each other, and should not as the type of the same resource. "@en ;
+    prof:isProfileOf dqm:EntitiesAsMembersOfDisjointClassesMetric .
+
+dqm-prob:OntologyHijackingException
+    a ifc:failureCase;
+    rdfs:label "Misplaced Property" ;
+    rdfs:comment "The referred resource hijacked an external authorative concept." ;
+    dct:keyword "These concepts are defined differently from its original ontology. "@en ;
+    prof:isProfileOf dqm:OntologyHijackingMetric .
+
+
+dqm-prob:UndefinedClass
+    a ifc:failureCase;
+    rdfs:label "Undefined Class";
+	rdfs:comment "The class used is undefined or deprecated in the respective schema" ;
+    dct:keyword "These classes are not defined, thus not recommended to use. "@en ;
+    prof:isProfileOf iqm:InvalidUseOfUndefinedClassesOrPropertiesMetric .
+
+dqm-prob:UndefinedProperty
+    a ifc:failureCase;
+    rdfs:label "Undefined Property";
+	rdfs:comment "The property used is undefined in its respective schema." ;
+    dct:keyword "These properties are not defined, thus not recommended to use. "@en ;
+    prof:isProfileOf iqm:InvalidUseOfUndefinedClassesOrPropertiesMetric .
+
+dqm-prob:DeprecatedClass
+    a ifc:failureCase;
+    rdfs:label "Deprecated Class";
+	rdfs:comment "The class used is Deprecated in the respective schema" ;
+    dct:keyword "These classes are outdated, thus not recommended to use. "@en ;
+    prof:isProfileOf iqm:InvalidUseOfDeprecatedClassesOrPropertiesMetric .
+
+dqm-prob:DeprecatedProperty
+    a ifc:failureCase;
+    rdfs:label "Deprecated Property";
+	rdfs:comment "The property used is Deprecated in its respective schema." ;
+    dct:keyword "These properties are outdated, thus not recommended to use. "@en ;
+    prof:isProfileOf iqm:InvalidUseOfDeprecatedClassesOrPropertiesMetric .
+
+
+ifc:mailformedLiterals
+    a ifc:failureCase;
+    rdfs:label "Malformed Literals";
+    rdfs:comment "The literals are not conforming to specified datatypes. " ;
+    dct:keyword "These literals do not comply with required datatypes. Please modify the literal or change the datatype. "@en ;
+    prof:isProfileOf iqm:malformedLiteralsMetric .
+
+
+# 2. Semantic Accuracy Failure Cases
+ifc:InaccurateAnnotationValues
+    a ifc:failureCase;
+    rdfs:label "Inaccurate Annotation";
+    rdfs:comment "Annnotations are not accurate. " ;
+    dct:keyword "These annotations do not accurately clarify the facts. Please check. "@en ;
+    prof:isProfileOf iqm:InaccurateAnnotationMetric .
+
+ifc:InsufficientCapturedInformation
+    a ifc:failureCase;
+    rdfs:label "Insufficient Information";
+    rdfs:comment  "An RDF dataset does not capture sufficient information for a target. " ;
+    dct:keyword "Please specify the information needed but absent for describing a target. "@en ;
+    prof:isProfileOf iqm:InsufficientCapturedInformationMetric .
+
+
+# 3. Conciseness Failure Cases
+ifc:RedundantAtrributes
+    a ifc:failureCase;
+    rdfs:label "Redundant Attribute";
+    rdfs:comment  "An entity of a data model has redundant attributes that represent the same information. " ;
+    dct:keyword "Please check if detected attributes are duplicates. If so, select one. "@en ;
+    prof:isProfileOf iqm:RedundantAttributesMetric .
+
+dqm-prob:ResourceReplica
+    a ifc:failureCase;
+    rdfs:label "Resource Replica";
+    rdfs:comment "The referred resource has a replica resource with a different id." ;
+    dct:keyword "Please keep only one ID for the same resource. "@en ;
+    prof:isProfileOf iqm:RedundantObjectsMetric .
+
+
+# 4. Understandability Failure Cases
+dqm-prob:NoHumanReadableLabel
+    a ifc:failureCase;
+    rdfs:label "No Human Readable Label";
+	rdfs:comment "Entities in this list have no Human Readable Label." ;
+    dct:keyword "There is no human-readable labels. Please add triples using these properties: rdfs:comment, rdfs:label, or skos:prefLabel"@en ;
+    prof:isProfileOf iqm:LackOfHumanReadableLabellingMetric .
+
+
+dqm-prob:NoVocabularyIndication
+    a ifc:failureCase;
+	rdfs:label "No Vocabulary Indication" ;
+	rdfs:comment "Vocabularies in this list are not indicated by a respective voID description." ;
+    dct:keyword "These vocabularies are not indicated by the Vocabulary of Interlinked Datasets (voID). "@en ;
+    prof:isProfileOf dqm:VocabularyUsageIndicationMetric .
+
+
+# 5. Availability Failure Cases
+ifc:URINotAvailable
+    a ifc:failureCase;
+    rdfs:label "URI Not Available";
+    rdfs:comment  "Linked resources are not available. " ;
+    dct:keyword "These URIs are not available due to client Error (4xx), Service Error (5xx), or others (3xx). "@en ;
+    prof:isProfileOf dqm:RDFAvailabilityMetric .
+
+
+# 6. Interlinking Failure Cases
+dqm-prob:NotValidForwardLink
+    a ifc:failureCase;
+    rdfs:label "Not Valid Deferenceable Forward-Link";
+	rdfs:comment "The described resource do not resolve in a valid Dereferenced Forward-Link" ;
+    dct:keyword "Please use resolvable links as forward link or investigate the resolvability issue. "@en ;
+    prof:isProfileOf iqm:BackLinksAndForwardLinksMetric .
+
+
+ifc:NoSameAsData
+    a ifc:failureCase;
+    rdfs:label "No SameAs Data";
+    rdfs:comment  "The data has no interlinked data with the relation owl:sameAs. " ;
+    dct:keyword "There is no external owl:sameAs data. It is not an interoperability problem unless there is one but not interlinked. "@en ;
+    prof:isProfileOf iqm:SameAsDataMetric .
+
+# 7. Relevancy Failure Cases
+ifc:IrrelevantAnnotationForProperties
+    a ifc:failureCase;
+    rdfs:label "Irrelevant Property Annotation";
+    rdfs:comment  "The property has annotations irrelevant to describing the property itself. " ;
+    dct:keyword "Please use annotations relevant to describing the (meta)information of the target property. "@en ;
+    prof:isProfileOf iqm:RelevancyOfAnnotations .
+
+ifc:IrrelevantAnnotationForModel
+    a ifc:failureCase;
+    rdfs:label "Irrelevant Model Annotation";
+    rdfs:comment  "The data model has annotations irrelevant to describing the mdoel itself. " ;
+    dct:keyword "Please use annotations relevant to describing the (meta)information of the target model. "@en ;
+    prof:isProfileOf iqm:RelevancyOfAnnotations .
+
+# 8. Versatility Failure Cases
+dqm-prob:NoMultipleFormatDefined
+    a ifc:failureCase;
+	rdfs:label "No format defined for a dataset" ;
+	rdfs:comment "The dataset must have more than one serialisation format defined using the void:feature predicate." ;
+    dct:keyword "The dataset does not have an alternative serialization format. It is not a key interoperability problem, but a potential improvement."@en ;
+    prof:isProfileOf dqm:DifferentSerialisationsMetric .
+
+
+ifc:NoAlternativeAccessMethod
+    a ifc:failureCase;
+    rdfs:label "No Alternative Access Method";
+	rdfs:comment "The dataset must have more than one access methods."  ;
+    dct:keyword "The dataset does not have alternative access methods. Interlinking using owl:sameAs can be one suggestion. "@en ;
+    prof:isProfileOf iqm:AlternativeAccessMethodMetric .
+
+# 9. Interpretability Failure Cases
+ifc:BlankNodeForMissingValues
+    a ifc:failureCase;
+    rdfs:label "Blank Node for Missing Value";
+    rdfs:comment  "The blank node is used for representing missing values. " ;
+    dct:keyword "There is blank node used in the dataset, which is not recommended because it will be not clear if a blank node represent a resource or an existing quantification. "@en ;
+    prof:isProfileOf dqm:NoBlankNodeMetric .
+
+ifc:AmbiguousAnnotation
+    a ifc:failureCase;
+    rdfs:label "Ambigious Annotation";
+    rdfs:comment  "The annotations are ambiguous that lead to misunderstanding or make it hard to comprehend. " ;
+    dct:keyword "Please rephrase annotations and make sure the target audience is able to comprehend them. "@en ;
+    prof:isProfileOf iqm:AmbiguousAnnotationMetric .
+
+
+# 10. Representational-consistency Failure Cases
+ifc:NotUseExistingTerms
+    a ifc:failureCase;
+    rdfs:label "Not Use Existing Terms";
+    rdfs:comment  "The used terms do not come from existing vocabularies. " ;
+    dct:keyword "These terms you used are not from existing vocabularies. Suggest using existing terms, unless none. "@en ;
+    prof:isProfileOf iqm:ReuseExistingTermsMetric .
+
+
+# 11. Trustworthiness Failure Cases
+ifc:NoTrustInformation
+    a ifc:failureCase;
+    rdfs:label "No Trust Information";
+    rdfs:comment  "There is no trust information provided for either dataset or model. " ;
+    dct:keyword "Please provide trust-related information."@en ;
+    prof:isProfileOf iqm:AvailabilityOfTrustInformation .
+
+ifc:NoInterpretationOfTrustInformation
+    a ifc:failureCase;
+    rdfs:label "No Interpretation of Trust Information";
+    rdfs:comment  "The trust information is not properly interpreted. " ;
+    dct:keyword "The trust information is not interpretable. Please check if 1) provided quantitative value is explained or 2)"@en ;
+    prof:isProfileOf iqm:InterpretationOfTrustInformation .
+
