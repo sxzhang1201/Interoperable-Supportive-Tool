@@ -39,13 +39,13 @@ iqm:
 #######################
 
 iqm:objectiveMetric
-	rdfs:subClass dqv:Metric;
+	a dqv:Metric;
     skos:prefLabel "Objective Metric";
 	skos:definition "The metrics refer to measures which cannot be affected by subjective factors, and have potential to be automated by machines. " .
 
 
 iqm:subjectiveMetric
-	rdfs:subClass dqv:Metric;
+	a dqv:Metric;
     skos:prefLabel "Subjective Metric";
 	skos:definition "The metrics refer to measures which can be affected by subjective factors, for example, personal experience and experts' active involvement.  ".
 
@@ -207,7 +207,7 @@ dqm:DifferentSerialisationsMetric
     ldq:hasAspect ldq:Serialization;
     ldq:hasGranularity ldq:Dataset;
     rdfs:label "Different Serialisation Metric" ;
-	rdfs:comment "Detects if a dataset has more than one serialisation format" .
+	rdfs:comment "Detects if a dataset has more than one serialisation format. " .
 
 iqm:AlternativeAccessMethodMetric
     rdfs:subClass iqm:objectiveMetric;
@@ -224,7 +224,7 @@ dqm:NoBlankNodeMetric
     ldq:hasAspect ldq:RDFModel;
     ldq:hasGranularity ldq:Graph;
     rdfs:label "No blank node metric" ;
-	rdfs:comment "Provides a measure for the usage of blank nodes in a dataset" .
+	rdfs:comment "Provides a measure for the usage of blank nodes in a dataset. " .
 
 iqm:AmbiguousAnnotationMetric
     rdfs:subClass iqm:subjectiveMetric;
