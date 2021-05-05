@@ -12,17 +12,13 @@ GraphFormat = 'turtle'
 EndPoint = "http://sparql.hegroup.org/sparql/"
 
 # The RDF graphs to be validated
-DataFile = "data/test1.ttl"
-# DataFile = "data/test2.ttl"
-# DataFile = "data/addison_test2.ttl"
-# DataFile = "http://ldp.cbgp.upm.es:8890/DAV/home/ejp/PERSONS_DEMO/person1"
+DataFile = "data/addison_dataset.ttl"
 
-
-# NAME = "Test1"
-# NAME = "Test2"
-NAME = "addison_test2"
+# String for naming a file
+NAME = "addison_dataset"
 # NAME = "remote1"
 
+# String of user feedback
 UserFeedBack = ""
 
 
