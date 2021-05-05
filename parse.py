@@ -57,7 +57,7 @@ def parse_remote_graph(graph_uri, graph_format):
     return g
 
 
-def parse_graph(local_or_remote, graph_source, graph_format):
+def parse_graph(graph_source, graph_format):
     """
     The function parses RDF graph either from a local RDF data or an URI.
 
@@ -68,10 +68,9 @@ def parse_graph(local_or_remote, graph_source, graph_format):
     :return: An rdflib.graph object
     """
 
-    if local_or_remote == "local":
-        g = parse_local_graph(graph_source, graph_format)
-
-    elif local_or_remote == "remote":
+    if "http" in graph_source:
         g = parse_remote_graph(graph_source, graph_format)
+    else:
+        g = parse_local_graph(graph_source, graph_format)
 
     return g

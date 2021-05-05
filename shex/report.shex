@@ -1,0 +1,40 @@
+PREFIX : <purl.org/ist/report/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dct: <http://purl.org/dc/terms/>
+
+PREFIX dqv: <http://www.w3.org/ns/dqv#>
+PREFIX eval:<http://purl.org/net/EvaluationResult#>
+PREFIX ldq: <http://linkeddata3.dia.fi.upm.es/ldq/#>
+
+
+:reportShape IRI {
+  a [eval:Evaluation];
+  eval:performedOn xsd:date;
+  eval:inputData @:inputDataShape;
+  eval:obtainedFrom @:qualityMeasurementShape;
+  ldq:utilizes @:assessmentTechniqueShape *
+}
+
+:qualityMeasurementShape IRI {
+  a [eval:QualityMeasurement];
+  dqv:isMeasuredOf dqv:Metric;
+  dqv:value xsd:string
+}
+
+:assessmentTechniqueShape IRI {
+  a ldq:assessmentTechnique;
+  ldq:hasAutomaticLevel ldq:AutomaticLevel
+}
+
+:inputDataShape IRI {
+  a dct:Dataset;
+  dqv:hasQualityAnnotation @:userQualityFeedbackShape ?
+}
+
+:userQualityFeedbackShape IRI {
+  a dqv:UserQualityFeedback;
+  sio:SIO_000300 xsd:string
+}
+
