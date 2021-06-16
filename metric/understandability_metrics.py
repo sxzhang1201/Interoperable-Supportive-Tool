@@ -1,4 +1,4 @@
-from rdflib.namespace import RDF, RDFS, SKOS
+from rdflib.namespace import RDF, RDFS, SKOS, DCAT
 from basic_func import get_case_info, graph_subset, Measurement
 from knowledge_base import DQV, EVAL, LDQ, SIO, OBO, DCT, DATA, REPORT, PROB
 
@@ -17,7 +17,7 @@ def lack_of_human_readable_labelling_metric(g):
     g_pref_label_triples, _ = graph_subset(g, SKOS.prefLabel)
 
     if sum([len(g_label_triples), len(g_comment_triples), len(g_pref_label_triples)]) == 0:
-        labelling_advice = get_case_info("http://www.diachron-fp7.eu/dqm-prob#NoHumanReadableLabel", DCT.keyword)
+        labelling_advice = get_case_info("http://www.diachron-fp7.eu/dqm-prob#NoHumanReadableLabel", DCAT.keyword)
         lack_of_labelling_measure = Measurement(failure_case=PROB.NoHumanReadableLabel, result=labelling_advice)
 
     else:

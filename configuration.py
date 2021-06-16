@@ -16,7 +16,7 @@ DataFile = "data/addison_dataset.ttl"
 
 # String for naming a file
 NAME = "addison_dataset"
-# NAME = "remote1"
+
 
 # String of user feedback
 UserFeedBack = ""

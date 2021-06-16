@@ -27,7 +27,6 @@ if __name__ == '__main__':
     misplaced_class_measure, misplaced_property_measure, \
     misused_datatype_property_measure, misused_object_property_measure = run_consistency_assessment(g)
 
-
     # 1 Representational-consistency metric
     reuse_existing_terms_measure = reuse_existing_terms_metric(g)
 

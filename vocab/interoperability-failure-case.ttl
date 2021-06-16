@@ -7,6 +7,7 @@
 @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
 @prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix prof: <http://www.w3.org/ns/dx/prof/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
 
 
 ### Existing ontologies related to RDF data assessment and FAIR principles

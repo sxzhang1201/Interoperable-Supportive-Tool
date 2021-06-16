@@ -1,6 +1,6 @@
 from rdflib.graph import Graph
 from knowledge_base import DQV, EVAL, LDQ, SIO, OBO, DCT, DATA, REPORT
-from rdflib.namespace import RDF, XSD, PROV, SKOS, RDFS, OWL
+from rdflib.namespace import RDF, XSD, PROV, SKOS, RDFS, OWL, DCAT
 from rdflib.term import Literal, URIRef
 from datetime import datetime
 from basic_func import get_case_info
@@ -63,14 +63,13 @@ def generate_report(*metric_measures, naming, feedback):
         measure_result = metric_measure.result
 
         # If the result is empty, it means there is no failure in this metric measurement, thus skipping it.
-        if len(measure_result) == 0:
+        if measure_result is None or len(measure_result) == 0:
             continue
 
         # Set IRI for "Quality Measurement"
         QualityMeasurementNode = URIRef("http://purl.org/ist/report/{}_report#{}-Measurement".
                                         format(naming, get_case_info(failure_case_iri=failure_case,
                                                                      property_iri=RDFS.label).replace(" ", "-")))
-
         print(QualityMeasurementNode)
 
         # Set "Quality Measurement" in report
@@ -83,7 +82,7 @@ def generate_report(*metric_measures, naming, feedback):
 
         # Get Failure Case Description from Vocabulary
         failure_case_description = get_case_info(failure_case_iri=failure_case,
-                                                 property_iri=DCT.keyword)
+                                                 property_iri=DCAT.keyword)
 
         # Initiate an empty string for interpreting results
         failure_case_detail = ""
