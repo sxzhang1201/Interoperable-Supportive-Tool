@@ -1,9 +1,8 @@
 ﻿,# Total,# Failure (%),# Total,# Failure (%),Failure reason
 ,OBO Library Dataset,,BFO,,
 Availability,,,,,
-Available URIs,1067,38 (4%),156,70 (45%),404 Not Found
-,,,,,403 Forbidden
-Predicates ,33,10 (30%),26,0,400 Bad Request
+Available URIs,1067,38 (4%),156,70 (45%),404 Not Found; 403 Forbidden;400 Bad Request
+Predicates ,33,10 (30%),26,0,
 Classes ,4,0,19,0,/
 Consistency,,,,,
 Classes correctly used as objects?,4,0,19,0,/
