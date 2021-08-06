@@ -1,0 +1,10 @@
+﻿Table 3. Failed properties of owl:ObjectProperty in the OBO dataset,
+Object Property,# Failure Triples
+http://usefulinc.com/ns/doap#bug-database,192
+http://xmlns.com/foaf/0.1/mbox,240
+http://usefulinc.com/ns/doap#mailing-list,28
+http://purl.obolibrary.org/obo/IAO_0000136,2
+http://www.w3.org/ns/dcat#accessURL,581
+http://www.w3.org/2000/01/rdf-schema#seeAlso,2
+http://purl.org/pav/createdWith,3
+http://rdf-vocabulary.ddialliance.org/discovery#fundedBy,7
