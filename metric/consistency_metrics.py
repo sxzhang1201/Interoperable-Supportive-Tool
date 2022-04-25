@@ -5,6 +5,139 @@ from query import generate_query_string, run_sparql_query
 from rdflib.graph import Graph
 from knowledge_base import IFC, PROB, DCT
 from rdflib.namespace import RDF, RDFS, SKOS
+from parse import parse_graph
+import pickle
+
+
+def misplaced_classes(g):
+
+    misplaced_class = []
+
+    track_issues = {}
+
+    no_specified_type = []
+
+    print(len(g))
+
+    # Obtain two subsets of graphs: one with rdf:type triples and one without rdf:type triples
+    _, g_no_type_triples = graph_subset(g, RDF.type)
+
+    print(len(g_no_type_triples))
+
+    p_list = []
+
+    for _, p, _ in g_no_type_triples:
+
+        p_list.append(p)
+
+    print(len(p_list))
+
+    # Remove duplicates
+    p_list = list(set(p_list))
+
+    print(len(p_list))
+
+    for item in p_list:
+        # Initiate graph
+        dg = Graph()
+
+        # Parse URI
+        try:
+            dg.parse(item)
+
+        except Exception as e:
+            print(e)
+
+            # Record Issues
+            track_issues[str(item)] = e
+
+        if len(dg) == 0:
+            print("{} is not available.".format(item))
+
+        g_subset = Graph()
+        g_subset += dg.triples((item, RDF.type, None))
+
+        if len(g_subset) == 0:
+            no_specified_type.append(str(item))
+
+        for _, _, obj in g_subset:
+
+            if str(obj) == "http://www.w3.org/2002/07/owl#Class":
+                misplaced_class.append(str(item))
+                print("This is not correct!")
+
+        else:
+            print("Correct!")
+
+    print(misplaced_class)
+    print(track_issues)
+    print(no_specified_type)
+
+    return misplaced_class, track_issues, no_specified_type
+
+
+def misplaced_properties(g):
+
+    misplaced_property = []
+
+    track_issues = {}
+
+    no_specified_type = []
+
+    # Obtain two subsets of graphs: one with rdf:type triples and one without rdf:type triples
+    g_type_triples, _ = graph_subset(g, RDF.type)
+
+    print(len(g_type_triples))
+
+    o_list = []
+
+    for _, _, o in g_type_triples:
+
+        print(o)
+
+        o_list.append(o)
+
+    # Remove duplicates
+    o_list = list(set(o_list))
+
+    print(len(o_list))
+
+    for item in o_list:
+
+        dg = Graph()
+
+        try:
+            dg.parse(item)
+
+        except Exception as e:
+            print(e)
+
+            # Record Issues
+            track_issues[str(item)] = e
+
+        if len(dg) == 0:
+            print("{} is not available.".format(item))
+
+        g_subset = Graph()
+        g_subset += dg.triples((item, RDF.type, None))
+
+        if len(g_subset) == 0:
+            no_specified_type.append(str(item))
+
+        for _, _, obj in g_subset:
+
+            if str(obj) in knowledge_base.property_list:
+                misplaced_property.append(str(item))
+                print("This is not correct!")
+
+        else:
+            print("Correct!")
+
+    print(misplaced_property)
+    print(track_issues)
+    print(no_specified_type)
+
+    return misplaced_property, track_issues, no_specified_type
 
 
 def misplaced_classes_or_properties_metric(g, class_or_property):
@@ -35,6 +168,8 @@ def misplaced_classes_or_properties_metric(g, class_or_property):
         subj_iri = subj.n3()
         pre_iri = pre.n3()
         obj_iri = obj.n3()
+
+        print("Testing Triple", (subj_iri, pre_iri, obj_iri))
 
         # Options of IRIs to be tested, which depends on the variable "class_or_property"
         iri_options = {
@@ -89,6 +224,74 @@ def misplaced_classes_or_properties_metric(g, class_or_property):
                                      result=failure_case_dict)
 
     return metric_measurement
+
+
+def misused_property_metric(g):
+    # Obtain the subset graph without rdf:type triples
+    _, g_no_type_triples = graph_subset(g, RDF.type)
+
+    track_issues = {}
+
+    failed_object_property = {}
+
+    failed_datatype_property = {}
+
+    no_specified_type = []
+
+    # Iterate each triple of the selected RDF graph
+    for s, p, o in g_no_type_triples:
+
+        print(s, p, o)
+
+        dg = Graph()
+
+        try:
+            dg.parse(p)
+
+        except Exception as e:
+            print(e)
+            # Record Issues
+            track_issues[str(p)] = e
+
+        # Get the type of predicate
+        g_subset = Graph()
+        g_subset += dg.triples((p, RDF.type, None))
+
+        if len(g_subset) == 0:
+            no_specified_type.append(p)
+
+        for _, _, obj in g_subset:
+
+            if obj.n3() == "<http://www.w3.org/2002/07/owl#ObjectProperty>":
+                if isinstance(obj, URIRef):
+                    print("The object Property {} is correctly used for {}. ".format(p, o))
+                else:
+                    print("The object Property {} is incorrectly used because the object is not IRI. ".format(p))
+                    failed_object_property[p] = (s, p, o)
+            elif obj.n3() == "<http://www.w3.org/2002/07/owl#DatatypeProperty>":
+                if isinstance(obj, Literal):
+                    print("The datatype Property {} is correctly used for {}. ".format(p, o))
+                else:
+                    print("The datatype Property {} is incorrectly used because the object is not Literal. ".format(p))
+                    failed_datatype_property[p] = (s, p, o)
+
+    print(failed_object_property)
+
+    pickle.dump(failed_object_property,
+                open("pickles/{}_misused_object_property.pickle".format(configuration.NAME),
+                     "wb"))
+
+    print(failed_datatype_property)
+
+    pickle.dump(failed_datatype_property,
+                open("pickles/{}_misused_datatype_property.pickle".format(configuration.NAME),
+                     "wb"))
+
+    print(track_issues)
+
+    print(no_specified_type)
+
+    return failed_object_property, failed_datatype_property
 
 
 def misused_owl_datatype_or_object_properties_metric(g):
@@ -220,4 +423,11 @@ def run_consistency_assessment(g):
            misused_datatype_property_measure, misused_object_property_measure
 
 
+if __name__ == '__main__':
 
+    g = parse_graph(graph_source="data/ontologies.ttl",
+                    graph_format=configuration.GraphFormat)
+
+    # misplaced_classes(g)
+    # misplaced_properties(g)
+    misused_property_metric(g)

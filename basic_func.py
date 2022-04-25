@@ -59,13 +59,13 @@ def select_used_terms(g):
     class_term_list = []
 
     for _, p, _ in g_no_type_triples:
-        property_term_list.append(p.n3())
+        property_term_list.append(p)
 
     for _, _, o in g_type_triples:
-        class_term_list.append(o.n3())
+        class_term_list.append(o)
 
     for _, _, o in g_subclass_triples:
-        class_term_list.append(o.n3())
+        class_term_list.append(o)
 
     property_term_list = list(set(property_term_list))
     class_term_list = list(set(class_term_list))

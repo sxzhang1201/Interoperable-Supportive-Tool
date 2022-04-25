@@ -114,7 +114,7 @@ iqm:malformedLiteralsMetric
 
 #2. Semantic Accuracy Metrics
 iqm:InaccurateAnnotationMetric
-    rdfs:subClass iqm:subjectiveMetric;
+    rdfs:subClassOf iqm:subjectiveMetric;
     dqv:inDimension iqd:semanticAccuracy;
     ldq:hasAspect ldq:Metadata;
     ldq:hasGranularity ldq:Graph;

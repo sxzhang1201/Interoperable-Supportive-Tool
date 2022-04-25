@@ -37,7 +37,7 @@ def generate_query_string(iri, query_pattern=None):
     return query_string
 
 
-def run_sparql_query(endpoint, query_string):
+def run_sparql_query(query_string):
     """
     To construct queried triples based on the SPARQL query results
     :param endpoint: String, indicating which SPARQL endpoint is used to execute SPARQL query.
@@ -45,21 +45,35 @@ def run_sparql_query(endpoint, query_string):
     :return: An rdflib "QueryResult" object that containing queried triples
     """
 
-    # Initiate SPARQL Wrapper class and implement querying
-    sparql = SPARQLWrapper(endpoint)
-    sparql.setQuery(query_string)
+    api_key = "f52df424-a6c1-40ce-a656-580eb3b5e3bf"
+
+    # Initiate SPARQL Wrapper class
+    sparql_ontobee = SPARQLWrapper("http://sparql.hegroup.org/sparql/")
+    sparql_bioportal = SPARQLWrapper("http://sparql.bioontology.org/sparql/")
+
+    sparql_bioportal.addCustomParameter("apikey", api_key)
+
+    # Input SPARQL query string
+    sparql_ontobee.setQuery(query_string)
+    sparql_bioportal.setQuery(query_string)
 
     # Get SPARQL results, and construct them in RDF format
-    sparql_results_triples = sparql.query().convert()
+    sparql_ontobee_result = sparql_ontobee.query().convert()
+    sparql_bioportal_result = sparql_bioportal.query().convert()
+
+    sparql_results_triples = sparql_ontobee_result + sparql_bioportal_result
 
     return sparql_results_triples
 
 
 if __name__ == '__main__':
-    query_string = generate_query_string('<https://semanticscience.org/resource/has-output>')
+    query_string = generate_query_string('<http://purl.obolibrary.org/obo/NCBITaxon_10088>')
     sparql_results_triples = run_sparql_query(EndPoint, query_string)
 
     print(query_string)
+    print(len(sparql_results_triples))
 
     for s, p, o in sparql_results_triples:
         print(s, p, o)
+
+

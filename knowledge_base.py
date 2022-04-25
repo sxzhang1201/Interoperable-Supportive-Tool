@@ -27,10 +27,13 @@ FailureCase = "vocab/interoperability-failure-case.ttl"
 
 # A list of Property Classes
 property_list = [
-    "<http://www.w3.org/2002/07/owl#ObjectProperty>",
-    "<http://www.w3.org/2002/07/owl#FunctionalProperty>",
-    "<http://www.w3.org/2002/07/owl#DatatypeProperty>",
-    "<http://www.w3.org/2002/07/owl#ObjectProperty>"
+    "http://www.w3.org/2002/07/owl#ObjectProperty",
+    "http://www.w3.org/2002/07/owl#FunctionalProperty",
+    "http://www.w3.org/2002/07/owl#DatatypeProperty",
+    "http://www.w3.org/2002/07/owl#ObjectProperty"
 ]
 
 PropertyForDefinition = [RDFS.isDefinedBy, RDFS.comment, SKOS.definition, DCT.description]
+
+if __name__ == '__main__':
+    print("http://www.w3.org/2002/07/owl#ObjectProperty" in property_list)

@@ -39,7 +39,7 @@ def parse_remote_graph(graph_uri, graph_format):
     """
     The function parse RDF graph from a remote URI.
     :param graph_uri: string, Unique Resource identifier (URI)
-    :param graph_format: String,used if format can not be determined from source. Defaults to rdf/xml.
+    :param graph_format: String, used if format can not be determined from source. Defaults to rdf/xml.
     Format support can be extended with plugins, but 'xml', 'n3', 'nt', 'trix', 'rdfa' are built in.
     :return:A n rdflib.graph object
     """

@@ -8,15 +8,17 @@ Vocabularies: path-based strings, indicating the relative paths of each vocabula
 # The representation format of the file
 GraphFormat = 'turtle'
 
-# The Ontobee SPARQL endpoint
-EndPoint = "http://sparql.hegroup.org/sparql/"
+EndPoint = ""
 
 # The RDF graphs to be validated
-DataFile = "data/addison_dataset.ttl"
+DataFile = "data/ontologies.ttl"
+# DataFile = "data/owl_test3.ttl"
+# DataFile = "data/test1.ttl"
 
 # String for naming a file
-NAME = "addison_dataset"
-
+NAME = "ontologies"
+# NAME = "owl_test"
+# DataFile = "data/test1.ttl"
 
 # String of user feedback
 UserFeedBack = ""

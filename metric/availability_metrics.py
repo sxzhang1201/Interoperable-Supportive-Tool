@@ -28,6 +28,8 @@ def rdf_availability_metric(g):
 
     total = len(iri_list)
 
+    print(total)
+
     count = 1
 
     # Initiate a dict for output

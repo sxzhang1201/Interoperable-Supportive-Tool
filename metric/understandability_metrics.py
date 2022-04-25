@@ -12,8 +12,8 @@ def lack_of_human_readable_labelling_metric(g):
     """
 
     # "rdfs:label" Triples
-    g_label_triples, _ = graph_subset(g, RDFS.label)
-    g_comment_triples, _ = graph_subset(g, RDFS.comment)
+    g_label_triples, _ = graph_subset(g,      RDFS.label)
+    g_comment_triples, _ = graph_subset(g,    RDFS.comment)
     g_pref_label_triples, _ = graph_subset(g, SKOS.prefLabel)
 
     if sum([len(g_label_triples), len(g_comment_triples), len(g_pref_label_triples)]) == 0:
